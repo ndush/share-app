@@ -13,7 +13,7 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import NavbarComponent from "./components/NavbarComponent";
-
+import "./App.css";
 import UserList from "./components/UserList";
 
 const App = () => {
@@ -21,13 +21,12 @@ const App = () => {
   const [isPremium, setIsPremium] = useState(false);
   const [freePostCount, setFreePostCount] = useState(20);
   const [users, setUsers] = useState([]);
-   const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
   const [followingUsers, setFollowingUsers] = useState([]);
   const [followingPosts, setFollowingPosts] = useState([]);
-    const [exceededFreeLimit, setExceededFreeLimit] = useState(false);
-    
+  const [exceededFreeLimit, setExceededFreeLimit] = useState(false);
 
   useEffect(() => {
     if (followingUsers.length > 0) {
@@ -77,25 +76,17 @@ const App = () => {
     setIsPremium(true);
   };
 
- const handleCreatePost = (newPost) => {
-   
-   setUserPosts((prevPosts) => [...prevPosts, newPost]);
- }
-   
-
-
-
-  const handlePostBlock = (postId) => {
-    
+  const handleCreatePost = (newPost) => {
+    setUserPosts((prevPosts) => [...prevPosts, newPost]);
   };
+
+  const handlePostBlock = (postId) => {};
 
   const handleFollowUser = (userId) => {
     setFollowingUsers((prevFollowingUsers) => {
       if (prevFollowingUsers.includes(userId)) {
-        
         return prevFollowingUsers.filter((id) => id !== userId);
       } else {
-      
         return [...prevFollowingUsers, userId];
       }
     });
@@ -117,11 +108,6 @@ const App = () => {
     }
   }, [followingUsers]);
 
-  // useEffect(() => {
-  //   const numPosts = followingPosts.length;
-  //   const freePostsLimit = 20;
-  //   setExceededFreeLimit(numPosts > freePostsLimit);
-  // }, [followingPosts]);
   useEffect(() => {
     const checkFreePostLimit = () => {
       const exceeded = true;
@@ -129,7 +115,6 @@ const App = () => {
     };
     checkFreePostLimit();
   }, []);
-
 
   return (
     <div className="app-container">
@@ -160,7 +145,6 @@ const App = () => {
                   onFollowUser={handleFollowUser}
                   handleCreatePost={handleCreatePost}
                 />
-               {/* // <Link to="/my-posts">My Posts</Link> */}
               </>
             )}
           </Route>
@@ -228,46 +212,6 @@ const App = () => {
               onCreatePost={handleCreatePost}
             />
           )}
-          {/* <Route exact path="/payment">
-            {exceededFreeLimit ? (
-              <Payment onUpgradeToPremium={handlePremiumUpgrade} />
-            ) : (
-              <Feed
-                currentUser={currentUser}
-                posts={posts}
-                onNewPost={handleCreatePost}
-              />
-            )} */}
-
-          {/* <Route path="/payment">
-            <h2>Premium Membership Payment</h2>
-            <PayPalScriptProvider
-              options={{
-                "client-id":
-                  "ATgdXa7jTwdR68hOQwbrx-74_OD3amCCIr1mjc3YL0FoK0WEVR4cDNOAOkt_fOXZLPX2zmVT4AiMUlHM",
-              }}
-            >
-              <PayPalButtons
-                createOrder={(data, actions) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        amount: {
-                          value: "$13.99",
-                        },
-                      },
-                    ],
-                  });
-                }}
-                onApprove={async (data, actions) => {
-                  const details = await actions.order.capture();
-                  const name = details.payer.name.given_name;
-                  alert("Transaction completed by " + name);
-                  setIsPremium(true);
-                }}
-              />
-            </PayPalScriptProvider>
-          </Route> */}
         </Switch>
       </Router>
     </div>

@@ -1,4 +1,3 @@
-// Profile.js
 import React from "react";
 
 const Profile = ({ currentUser }) => {

@@ -1,40 +1,33 @@
-// UpgradeToPremium.jsx
-
 import React from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 
 const UpgradeToPremium = ({ onPaymentSuccess }) => {
-  // Handle PayPal payment success
   const handlePaymentSuccess = (details, data) => {
-    // Perform any actions on successful payment
-    console.log("Payment successful!");
+    console.log("Payment successful! Details:", details);
+    console.log("Payment successful! Data:", data);
     onPaymentSuccess();
   };
 
-  // Handle PayPal payment error
   const handlePaymentError = (error) => {
-    // Handle payment error if needed
     console.error("Payment error:", error);
   };
 
-  // Handle PayPal payment cancellation
   const handlePaymentCancel = (data) => {
-    // Handle payment cancellation if needed
     console.log("Payment cancelled:", data);
   };
 
   return (
-    <div>
+    <div className="upgrade-to-premium">
       <h2>Upgrade to Premium</h2>
       <p>Upgrade to premium to view all posts.</p>
       <PayPalButton
-        amount={10} // Replace with the actual premium subscription amount
+        amount="100.00"
         onSuccess={handlePaymentSuccess}
         onError={handlePaymentError}
         onCancel={handlePaymentCancel}
         options={{
-          clientId: "YOUR_PAYPAL_CLIENT_ID", // Replace with your PayPal client ID
-          currency: "USD", // Replace with the currency code for your country
+          clientId: "Ad58THKrUymIxoQyTWRFnRTv-GMBLCb6I45N-r4qGBMVKOZJJo8Ga_TEP7nZju1XqOFlr4dDyupnGcjd",
+          currency: "USD",
         }}
       />
     </div>

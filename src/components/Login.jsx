@@ -28,7 +28,7 @@ const Login = ({ onLogin, users }) => {
       <h2>Login</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <div>
-        <label htmlFor="username">Username/Email:</label>
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
           id="username"

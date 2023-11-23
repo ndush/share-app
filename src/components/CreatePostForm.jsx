@@ -5,14 +5,13 @@ const CreatePostForm = ({ onCreatePost }) => {
   const [body, setBody] = useState("");
 
   const handleCreatePost = () => {
-    // Create the post and pass isPaid flag to determine if it's a paid post
-    onCreatePost({ title, body, isPaid: false }); // Assuming it's not a paid post
+    onCreatePost({ title, body, isPaid: false });
     setTitle("");
     setBody("");
   };
 
   return (
-    <div>
+    <div className="create-post-form-container">
       <h2>Create New Post</h2>
       <div>
         <input

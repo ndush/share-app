@@ -24,7 +24,6 @@ const Register = ({ onRegister }) => {
 
  
   const isValidZipCode = (zip) => {
-    // Regular expression to validate zip code format: XXXXX or XXXXX-XXXX
     const zipCodePattern = /^\d{5}(?:-\d{4})?$/;
     return zipCodePattern.test(zip);
   };
@@ -43,7 +42,7 @@ const Register = ({ onRegister }) => {
         </label>
         <br />
         <label>
-          Zip Code (Password):
+          Zip Code:
           <input
             type="text"
             value={zipcode}

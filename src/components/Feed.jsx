@@ -18,6 +18,7 @@ const Feed = ({
     handleCreatePost(newPost);
     setPosts([...posts, newPost]);
   };
+
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
@@ -28,10 +29,6 @@ const Feed = ({
         console.error("Error fetching posts:", error);
       });
   }, []);
-
-  // const handleCreatePost = (newPost) => {
-  //   setPosts([...posts, newPost]);
-  // };
 
   const handlePostView = () => {
     setFreePostCount((prevCount) => prevCount - 1);
@@ -60,7 +57,7 @@ const Feed = ({
       <p>Welcome, {currentUser.username}!</p>
 
       {showPaywall ? (
-        <div>
+        <div className="paywall-container">
           <h3>Paywall</h3>
           <p>
             You have exceeded your free post limit. Upgrade to Premium to view
@@ -80,32 +77,34 @@ const Feed = ({
               <Link to="/register">Register</Link> to upgrade to Premium.
             </p>
           )}
-          <PayPalScriptProvider
-            options={{
-              "client-id":
-                "ATgdXa7jTwdR68hOQwbrx-74_OD3amCCIr1mjc3YL0FoK0WEVR4cDNOAOkt_fOXZLPX2zmVT4AiMUlHM",
-            }}
-          >
-            <PayPalButtons
-              createOrder={(data, actions) => {
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: "$13.99",
+          <div className="paypal-container">
+            <PayPalScriptProvider
+              options={{
+                "client-id":
+                  "Ad58THKrUymIxoQyTWRFnRTv-GMBLCb6I45N-r4qGBMVKOZJJo8Ga_TEP7nZju1XqOFlr4dDyupnGcjd",
+              }}
+            >
+              <PayPalButtons
+                createOrder={(data, actions) => {
+                  return actions.order.create({
+                    purchase_units: [
+                      {
+                        amount: {
+                          value: "100.00",
+                        },
                       },
-                    },
-                  ],
-                });
-              }}
-              onApprove={async (data, actions) => {
-                const details = await actions.order.capture();
-                const name = details.payer.name.given_name;
-                alert("Transaction completed by " + name);
-                setIsPremium(true);
-              }}
-            />
-          </PayPalScriptProvider>
+                    ],
+                  });
+                }}
+                onApprove={async (data, actions) => {
+                  const details = await actions.order.capture();
+                  const name = details.payer.name.given_name;
+                  alert("Transaction completed by " + name);
+                  setIsPremium(true);
+                }}
+              />
+            </PayPalScriptProvider>
+          </div>
         </div>
       ) : (
         <>

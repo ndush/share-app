@@ -13,7 +13,6 @@ const Following = ({
     onFollowUser(userId);
   };
 
-  // Filter out the current user from the list of users
   const filteredUsers = users.filter((user) => user.id !== currentUser.id);
 
   return (
