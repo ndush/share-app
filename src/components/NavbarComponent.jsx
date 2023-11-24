@@ -19,9 +19,9 @@ const NavbarComponent = ({
         </li>
         {isAuthenticated && (
           <>
-            <li>
+            {/* <li>
               <Link to="/payment">Payment</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/my-posts">My Posts</Link>
             </li>
